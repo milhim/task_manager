@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.login');
 });
+Route::get('/login',[LoginController::class,'index'])->name('login.page');
+Route::post('/login',[LoginController::class,'handle'])->name('login.process');
+Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+
+Route::get('/register', [RegisterController::class, 'show'])->name('register');
+Route::post('/register', [RegisterController::class, 'handle'])->name('register.process');
+
+
+Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
