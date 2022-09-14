@@ -35,13 +35,19 @@ Route::group([
         Route::get('/manager/tasks/employees/{employee_id}',[TaskController::class,'showTasksForEmp']);//get tasks for an employee
         Route::get('/manager/task/{task_id}/status',[TaskController::class,'taskStatus']);//task staus
         Route::get('/manager/task/{task_id}/time',[TaskController::class,'taskTime']);//task start and end
-        Route::post('/tasks/comments/{task_id}',[CommentController::class,'store']);//add comment
 
         //Employees
         Route::get('/manager/employees',[EmployeeController::class,'index']);
+        Route::put('/manager/employee/task/{task_id}',[EmployeeController::class,'changeTaskStatus']);
+        
     //2)Employee routes
         Route::get('/employee/tasks',[EmployeeTaskController::class,'index']);
         Route::put('/employee/task/{task_id}',[EmployeeTaskController::class,'updateTaskStatus']);
         Route::get('/employee/task/time',[EmployeeTaskController::class,'taskTime']);//task start and end
+        Route::put('/employee/task/{task_id}/askforAprov',[EmployeeTaskController::class,'askforAprov']);
+
+
+    //Comments
+    Route::post('/tasks/comments/{task_id}',[CommentController::class,'store']);//add comment
 
 });

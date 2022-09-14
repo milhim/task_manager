@@ -25,6 +25,9 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'handle'])->name('register.process');
+Route::put('/register', [RegisterController::class, 'update'])->name('update.process');
+Route::get('/register/{id}', [RegisterController::class, 'show']);
+Route::delete('/register/{id}', [RegisterController::class, 'destroy']);
 
 
 Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
