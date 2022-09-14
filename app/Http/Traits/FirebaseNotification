@@ -4,8 +4,9 @@ namespace App\Http\Traits;
 
 trait FirebaseNotification
 {
-    public function sendNotification($serverKey,$title,$message,$FcmTokens){
+    public function sendNotification($title,$message,$FcmTokens){
         
+        $serverKey = 'AAAAwDw-wak:APA91bE6vsEcHFfEyCyOM27Tly2f7ArFJd-piJ5z53XAkLJzeXaAx65GWmSHp-TVF25H93cAmlNfQ3EP1rdeLq0UTNbLJgrTJNHIAapbsleNBpt5KTaXXsPZG1Y95Xqe8_AqOMe6t8sT';
         $url = 'https://fcm.googleapis.com/fcm/send';
 
         $data = [

@@ -38,11 +38,10 @@ class TaskController extends Controller
             $user->tasks()->attach($task);
         }
         //send notification 
-        $serverKey = 'AAAAwDw-wak:APA91bE6vsEcHFfEyCyOM27Tly2f7ArFJd-piJ5z53XAkLJzeXaAx65GWmSHp-TVF25H93cAmlNfQ3EP1rdeLq0UTNbLJgrTJNHIAapbsleNBpt5KTaXXsPZG1Y95Xqe8_AqOMe6t8sT';
         $notificationTitle='new notification';
         $notificationMessage='Manager' . auth()->user()->name . 'asign' . $request->task_name . 'for you';
 
-        $this->sendNotification($serverKey,$notificationTitle,$notificationMessage,$FcmTokens);
+        $this->sendNotification($notificationTitle,$notificationMessage,$FcmTokens);
   
         return response()->json($task, 201);
     }
