@@ -4,22 +4,22 @@ namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     //
     public function index()
     {
-        return view('admin.login');
+        return view('auth.login');
     }
 
     public function handle()
     {
-        $success = auth()->attempt([
+        $success = Auth::guard('web')->attempt([
             'email' => request('email'),
             'password' => request('password')
         ], request()->has('remember'));
-
         if ($success) {
             return redirect()->to('/dashboard');
         } else {
@@ -33,6 +33,6 @@ class LoginController extends Controller
     {
         auth()->logout();
 
-        return redirect()->route('login.page');
+        return redirect()->route('login');
     }
 }

@@ -22,10 +22,9 @@
                 <ul class="navbar-nav">
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login.page') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
                         </li>
                     @endguest
-
                     @auth
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}">Logout</a>

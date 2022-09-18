@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -17,17 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.login');
+    return view('auth.login');
 });
-Route::get('/login',[LoginController::class,'index'])->name('login.page');
-Route::post('/login',[LoginController::class,'handle'])->name('login.process');
-Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'handle'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/register', [RegisterController::class, 'show'])->name('register');
-Route::post('/register', [RegisterController::class, 'handle'])->name('register.process');
-Route::put('/register', [RegisterController::class, 'update'])->name('update.process');
-Route::get('/register/{id}', [RegisterController::class, 'show']);
-Route::delete('/register/{id}', [RegisterController::class, 'destroy']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'handle'])->name('register');
 
+Route::middleware('auth:web')->group(function () {
+    Route::post('/create-new-user', [UserController::class], 'registerNewUser');
+    Route::put('/update-user', [UserController::class], 'updateExistingUser');
+    Route::get('/show-user/{id}', [UserController::class], 'showUserInformation');
+    Route::post('/delete-user/{id}', [UserController::class], 'destroyUser');
 
-Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});

@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;;
 
 class RegisterController extends Controller
 {
-    public function index()
-    {
-        return  view('auth.register');
+    protected $name = 'name';
+
+    public function index(){
+        return view('auth.register');
     }
+
+
 
     public function handle()
     {
@@ -34,32 +38,7 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-
-        return response()->json($user,201);
+        return view('auth.login');
     }
-    public function update(Request $request){
-        $user=User::find($request->id);
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->phone=$request->phone;
-        if($request->password){
-            $user->password=Hash::make($request->password);
-        }
-        $user->role_id=$request->role_id;
-        $user->save();
-
-        return response()->json($user);
-
-
-    }
-    public function show($id){
-        $user=User::find($id);
-        return response()->json($user);
-    }
-    public function destroy(Request $request, $id){
-        $user=User::find($request->id);
-        $user->delete();
-
-        return response()->json(['message'=>'user has been deleted','id'=>$id]);
-    }
+  
 }

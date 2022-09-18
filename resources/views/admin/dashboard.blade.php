@@ -8,7 +8,7 @@
                 <div class="p-2 flex-shrink-0 bd-highlight">
                     <button type="button" class="btn btn-primary" id="btn-add" data-bs-toggle="modal"
                         data-bs-target="#formModal">
-                        New User
+                        New User 
                     </button>
 
                 </div>

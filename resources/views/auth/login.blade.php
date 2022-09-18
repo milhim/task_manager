@@ -9,7 +9,7 @@
                         <h2>Admin Login</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('login.process') }}" method="post">
+                        <form action="{{ route('login') }}" method="post">
                             @csrf
 
                             <!-- Email-->

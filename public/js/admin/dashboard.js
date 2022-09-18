@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
         let state = jQuery("#btn-save").val();
         let type = "POST";
         let user_id = jQuery("#user_id").val();
-        let ajaxurl = "register";
+        let ajaxurl = "create-new-user";
 
         $.ajax({
             type: type,
@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
         jQuery("#btn-update").show();
 
         let user_id = $(this).attr("id");
-        $.get(`/register/${user_id}`, (user) => {
+        $.get(`/show-user/${user_id}`, (user) => {
             $("#user_id").val(user.id);
             $("#name").val(user.name);
             $("#email").val(user.email);
@@ -87,7 +87,7 @@ jQuery(document).ready(function ($) {
 
         $.ajax({
             type: "put",
-            url: `register`,
+            url: `update-user`,
             data: {
                 id: jQuery("#user_id").val(),
                 name: jQuery("#name").val(),
@@ -128,7 +128,7 @@ jQuery(document).ready(function ($) {
         let user_id = $(this).attr("id");
         $.ajax({
             type: "delete",
-            url: `register/${user_id}`,
+            url: `delete-user/${user_id}`,
             data: {
                 id: user_id,
             },
